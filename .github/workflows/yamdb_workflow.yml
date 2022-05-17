@@ -42,7 +42,7 @@ jobs:
         uses: docker/build-push-action@v2 #FIXME
         with: 
           push: true
-          tags: sproggi/infra_web:v1.05.2022
+          tags: sproggi/yamdb:latest
 
   deploy:
     runs-on: ubuntu-latest
