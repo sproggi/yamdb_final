@@ -1,6 +1,6 @@
 from rest_framework import permissions
 
-from api_yamdb.settings import STAFF_ROLES, ADMIN
+from api_yamdb.settings import ADMIN, STAFF_ROLES
 
 
 class IsAuthorOrAdminOrReadOnly(permissions.BasePermission):

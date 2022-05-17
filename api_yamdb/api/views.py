@@ -1,3 +1,6 @@
+from api import serializers
+from api.permissions import (IsAdmin, IsAdminOrReadOnly,
+                             IsAuthorOrAdminOrReadOnly)
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
 from django.db.models import Avg
@@ -9,14 +12,12 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
+from reviews import models
 
 from api_yamdb.settings import ADMIN_EMAIL
-from api import serializers
-from api.permissions import (IsAdmin, IsAdminOrReadOnly,
-                             IsAuthorOrAdminOrReadOnly)
+
 from .filters import TitleFilter
 from .viewsets import CreateDeleteListViewset
-from reviews import models
 
 
 class GenreViewSet(CreateDeleteListViewset):
@@ -55,8 +56,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         title_id = self.kwargs.get('title_id')
-        queryset = models.Review.objects.filter(title=title_id)
-        return queryset
+        return models.Review.objects.filter(title=title_id)
 
     def perform_create(self, serializer):
         title_id = self.kwargs.get('title_id')
@@ -71,8 +71,7 @@ class CommentViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         review_id = self.kwargs.get('review_id')
-        queryset = models.Comment.objects.filter(review=review_id)
-        return queryset
+        return models.Comment.objects.filter(review=review_id)
 
     def perform_create(self, serializer):
         review_id = self.kwargs.get('review_id')
@@ -106,14 +105,13 @@ class UserViewSet(viewsets.ModelViewSet):
         user = request.user
         if request.method == 'GET':
             serializer = serializers.UserSerializer(user)
-            return Response(serializer.data)
         if request.method == 'PATCH':
             serializer = serializers.UserSerializer(
                 user, data=request.data, partial=True
             )
             serializer.is_valid(raise_exception=True)
             serializer.save()
-            return Response(serializer.data)
+        return Response(serializer.data)
 
 
 class SignUpUserView(APIView):

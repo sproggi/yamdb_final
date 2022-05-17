@@ -6,7 +6,6 @@ from django.core.management.base import BaseCommand
 from django.shortcuts import get_object_or_404
 from reviews import models
 
-
 model_names = {
     'category': 'Category',
     'comments': 'Comment',
