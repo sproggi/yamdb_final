@@ -38,5 +38,6 @@ DB_PORT=5432
     ```
     docker-compose exec web python manage.py collectstatic
     ```
-    
+test
+
 ![yamdb_final workflow](https://github.com/sproggi/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
