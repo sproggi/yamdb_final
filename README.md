@@ -38,6 +38,17 @@ DB_PORT=5432
     ```
     docker-compose exec web python manage.py collectstatic
     ```
-test
+
+### Документация по API
+```
+http://51.250.19.193/redoc/
+```
+### Админка
+```
+http://51.250.19.193/admin/
+```
+### Основной эндпоинт:
+```
+http://51.250.19.193/api/v1/
 
 ![yamdb_final workflow](https://github.com/sproggi/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
